@@ -1,25 +1,24 @@
-program HelloCGI;
-uses dos;
+PROGRAM NameCgi(INPUT, OUTPUT);
+USES
+  DOS;
 
-var
-  QueryString, Name: string;
-  PosName: integer;
+VAR
+  QueryString, Name: STRING;
+  PosName: INTEGER;
 
-begin
-  { Вывод HTTP-заголовков }
-  writeln('Content-Type: text/plain');
-  writeln;
+BEGIN
+  WRITELN('Content-Type: text/plain');
+  WRITELN;
 
-  { Получение QUERY_STRING }
   QueryString := GetEnv('QUERY_STRING');
 
-  { Поиск 'name=' в строке запроса }
   PosName := Pos('name=', QueryString);
 
-  if PosName > 0 then
+  IF PosName > 0 
+  THEN
     Name := Copy(QueryString, PosName + 5, Length(QueryString) - PosName - 4)  
-  else
+  ELSE
     Name := 'Anonymous';
 
-  writeln('Hello dear, ', Name, '!');
-end.
+  WRITELN('Hello dear, ', Name, '!')
+END.
